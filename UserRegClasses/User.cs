@@ -10,7 +10,11 @@
 
         public User(string user, string pas, string email)
         {
-            if (user is not null && user.Length >= 5 && user.Length <= 20)
+
+
+            if (user is not null && user.Length >= 5 && user.Length <= 20 
+                && pas is not null && pas.Length >= 8
+                && email is not null && email.EndsWith("@email.com"))
             {
                 Username = user;
                 Password = pas;
@@ -18,10 +22,10 @@
             }
             else
             {
-                throw new ArgumentException("Username must be between 5 and 20 characters!");
+                throw new ArgumentException("Username must be between 5 and 20 characters and email must end with '@email.com'");
             }
-            
-            
+
+
         }
     }
 }

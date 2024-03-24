@@ -10,7 +10,7 @@ namespace UserRegClasses
     {
         List<User> Users = new List<User>();
 
-        public void AddUser(User user)
+        public string AddUser(User user)
         {
             
             if (Users.Exists(u => u.Username == user.Username))
@@ -19,6 +19,7 @@ namespace UserRegClasses
             }
 
             Users.Add(user);
+            return $"{user.Username} has been sucessfully created!";
         }
 
     }
