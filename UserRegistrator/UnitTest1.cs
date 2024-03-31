@@ -20,16 +20,24 @@ namespace UserRegistrator
             Assert.Throws<ArgumentException>(() => userBank.AddUser(user2));
         }
 
-        [Fact]
-        public void Check_If_User_Created_With_Invalid_Username_Throws_Exception()
+
+
+        [Theory]
+        [InlineData("JagÄrÖver20Karaktärer1234")]
+        [InlineData("4Let")]
+        public void Check_If_User_Created_With_Invalid_Username_Throws_Exception(string user)
         {
             // Arrange & Act
+
+            // Fixa till att Datorows som skall ge ut olika värden samt olika fellmeddelanden beroende på datat som skickas in
             
-            var exception1 = Assert.Throws<ArgumentException>(() => new User("Jagäröver20karaktärerjagsvär1234", "password", "whatever@email.com"));
-            var exception2 = Assert.Throws<ArgumentException>(() => new User("User", "password", "whatever@email.com"));
+            var exception = Assert.Throws<ArgumentException>(() => new User($"{user}", "pas!sword", "whatever@email.com"));
+            //var exception2 = Assert.Throws<ArgumentException>(() => new User("User", "pas!sword", "whatever@email.com"));
             // Assert
-            Assert.Equal("Username must be between 5 and 20 characters and email must end with '@email.com'", exception1.Message);
-            Assert.Equal("Username must be between 5 and 20 characters and email must end with '@email.com'", exception2.Message);
+            Assert.Equal("'Username must be between 5 and 20'", exception.Message);
+            // Assert.Equal("Username must be between 5 and 20 characters and email must end with '@email.com'", exception2.Message);
+           
+
 
         }
 
@@ -46,7 +54,7 @@ namespace UserRegistrator
 
             
             var exception = Assert.Throws<ArgumentException>(() => new User("Josef", "12345@67aa", "DåligEmail"));
-            Assert.Equal("Username must be between 5 and 20 characters and email must end with '@email.com'", exception.Message);
+            Assert.Equal("email must end with '@email.com", exception.Message);
         }
 
         [Fact]
@@ -54,12 +62,24 @@ namespace UserRegistrator
         {
 
             var userbank = new UserBank();
-            var user = new User("UserTest", "Jagheterstefan1", "Stefan.kureljusic@email.com");
+            var user = new User("UserTest", "Jagheterst@efan1", "Stefan.kureljusic@email.com");
 
-           string success = userbank.AddUser(user);
+            string success = userbank.AddUser(user);
 
-           Assert.Equal($"{user.Username} has been sucessfully created!", success);
+            Assert.Equal($"{user.Username} has been sucessfully created!", success);
 
+        }
+
+        [Fact]
+        public void Check_If_Added_Users_PassWord_Contains_The_Right_Formatting()
+        {
+            // Arrange
+            var userbank = new UserBank();
+
+            // Act and Arrange
+            var exception = Assert.Throws<ArgumentException>(() => new User("Josef", "LösenordetharingeSpecialTecken", "stefan@email.com"));
+
+            Assert.Equal("'Password lenght must be over 8 characters, and needs a special sign'", exception.Message);
         }
     }
 }
