@@ -20,7 +20,7 @@ namespace UserRegClasses
        {
 
 
-
+            // Gjorde denna för att samla flera errors, ifall men gör mer än ett fel.
                 
 
                 switch (user)

@@ -15,7 +15,7 @@ namespace UserRegClasses
         public User(string user, string pas, string email)
         {
             
-
+            // If sats som går igenom alla argument som kommer in och kollar att alla requirements nås!
             
             if (email is not null && email.EndsWith("@email.com"))
             {
@@ -31,12 +31,12 @@ namespace UserRegClasses
                 if (pas is not null && pas.Length >= 8 && CheckIsCharacterSpecial(pas))
                 {
                     Username = user;
-                    Password = pas;
+                    Password = pas; // Ifall allt stämmer med requirements, sätt argumenten och tillge de till parametrerna och skapa usern.
                     Email = email;
                 }
                 else
                 {
-                    throw new ArgumentException("'Password lenght must be over 8 characters, and needs a special sign'");
+                    throw new ArgumentException("'Password lenght must be over 8 characters, and needs a special sign'"); // Annars kasta nån av dessa exceptions beroende på vilken if sats som fångar upp felet.
                 }
                 
             }
@@ -50,11 +50,11 @@ namespace UserRegClasses
 
         private bool CheckIsCharacterSpecial(string password)
         {
-            foreach (char c in password)
+            foreach (char c in password) // Checkar varje karaktär i passwordargument som skickas in
             {
-                if (!char.IsLetterOrDigit(c))
+                if (!char.IsLetterOrDigit(c)) // Om någon av chars är en vanlig bokstav eller siffra....
                 {
-                    return true;
+                    return true; // Så triggas en bool som returnerar true!
                 }
             }
             return false;

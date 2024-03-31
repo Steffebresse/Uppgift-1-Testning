@@ -25,6 +25,9 @@ namespace UserRegistratorTest
                     Debug.WriteLine(error.Message);
                 }
             }
+
+            // Försök få ett testfall där du testar typ vilka felmeddelanden som skall komma!
+
             Assert.Equal(3, errors.Count);
         }
 
