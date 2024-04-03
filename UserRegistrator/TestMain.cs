@@ -34,9 +34,22 @@ namespace UserRegistrator
             var exception = Assert.Throws<ArgumentException>(() => new User($"{user}", "pas!sword", "whatever@email.com")); // Kör båda aöternativen, ett namn som är för kort, och ett som är för långt.
             
             // Assert
-            Assert.Equal("'Username must be between 5 and 20'", exception.Message); // Sedan skall exceptionet motsvara detta felmeddlande under båda testarna.
+            Assert.Equal("'Username must be between 5 and 20, and must only include letters'", exception.Message); // Sedan skall exceptionet motsvara detta felmeddlande under båda testarna.
             
            
+        }
+
+        [Fact]
+        public void Check_If_User_Created_With_Valid_Username_Lenght_With_Wrong_Formating()
+        {
+            // Arrange & Act
+
+            var exception = Assert.Throws<ArgumentException>(() => new User($"Within20Chars", "pas!sword", "whatever@email.com")); // Kollar om användarnamn med rätt antal karaktärer triggar ett fel, ifall den inte har användarnamn A-Z
+
+            // Assert
+            Assert.Equal("'Username must be between 5 and 20, and must only include letters'", exception.Message); // Sedan skall exceptionet motsvara detta felmeddlande under båda testarna.
+
+
         }
 
         [Fact]

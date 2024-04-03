@@ -1,5 +1,7 @@
 ﻿
 
+using System.Text.RegularExpressions;
+
 namespace UserRegClasses
 {
     public class User
@@ -19,13 +21,13 @@ namespace UserRegClasses
             
             if (email is not null && email.EndsWith("@email.com"))
             {
-                if (user is not null && user.Length >= 5 && user.Length <= 20)
+                if (user is not null && user.Length >= 5 && user.Length <= 20 && Regex.IsMatch(user, "^[a-zA-Z]+$"))
                 {
                     
                 }
                 else
                 {
-                    throw new ArgumentException("'Username must be between 5 and 20'");
+                    throw new ArgumentException("'Username must be between 5 and 20, and must only include letters'");
                 }
 
                 if (pas is not null && pas.Length >= 8 && CheckIsCharacterSpecial(pas))

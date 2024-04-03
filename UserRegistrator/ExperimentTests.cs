@@ -28,7 +28,7 @@ namespace UserRegistratorTest
 
             // Försök få ett testfall där du testar typ vilka felmeddelanden som skall komma!
 
-            Assert.Equal(3, errors.Count);
+            Assert.Equal(3, errors!.Count);
         }
 
 
